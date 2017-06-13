@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>swiper</title>
+  <style>
+      body {
+        text-align: center;
+      }
+      table { 
+       border-collapse:collapse; 
+       border-spacing:0; 
+       margin: 0 auto;
+      } 
+      th,td { 
+       padding: 0; 
+      }
+      table td {
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+  </style>
+</head>
+<body>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="94">Parameter（参数）</td>
+<td valign="top" width="94">Type(类型)</td>
+<td valign="top" width="45">Default Value（默认值</td>
+<td valign="top" width="40">Example（例子）</td>
+<td valign="top" width="207">Description（说明）</td>
+</tr>
+<tr>
+<td valign="top" width="94">speed</td>
+<td valign="top" width="94">number</td>
+<td valign="top" width="45">300</td>
+<td valign="top" width="40">600</td>
+<td valign="top" width="207">slides滑块动画之间的持续时间（单位ms）</td>
+</tr>
+<tr>
+<td valign="top" width="94">eventTarget</td>
+<td valign="top" width="94">string</td>
+<td valign="top" width="45">&#8216;wrapper&#8217;</td>
+<td valign="top" width="40">&#8216;container&#8217;</td>
+<td valign="top" width="207">swipers事件对象，默认状态下所有的触控事件只能用于wrapper。如若需要其他元素包含在container内以及使用swipers,那么可以使用&#8217;container&#8217;. 2.4.2版本新增</td>
+</tr>
+<tr>
+<td valign="top" width="94">autoplay</td>
+<td valign="top" width="94">number</td>
+<td valign="top" width="45">5000</td>
+<td valign="top" width="40">-</td>
+<td valign="top" width="207">过渡延迟时间（单位ms），参数没有指定的情况下，不生效，（补充：当用户操作后autoplay失效）</td>
+</tr>
+<tr>
+<td valign="top" width="94">autoplayDisableOninteraction</td>
+<td valign="top" width="94">boolean</td>
+<td valign="top" width="45">true</td>
+<td valign="top" width="40">false</td>
+<td valign="top" width="207">当设置为false时，用户操作之后（swipes,arrow以及pagination 点击）autoplay不会被禁掉，用户操作之后每次都会重新启动autoplay。</td>
+</tr>
+<tr>
+<td valign="top" width="94">autoplayStopOnLast</td>
+<td valign="top" width="94">boolean</td>
+<td valign="top" width="45">false</td>
+<td valign="top" width="40">true</td>
+<td valign="top" width="207">设置为false后autoplay在最后一个块下失效（在没有设置loop的情况下）</td>
+</tr>
+<tr>
+<td valign="top" width="94">mode</td>
+<td valign="top" width="94">string</td>
+<td valign="top" width="45">&#8216;horizontal&#8217;</td>
+<td valign="top" width="40">&#8216;vertical&#8217;</td>
+<td valign="top" width="207">slides滑动方式，水平或垂直</td>
+</tr>
+<tr>
+<td valign="top" width="94">loop</td>
+<td valign="top" width="94">boolean</td>
+<td valign="top" width="45">false</td>
+<td valign="top" width="40">true</td>
+<td valign="top" width="207">true 为loop模式生效</td>
+</tr>
+<tr>
+<td valign="top" width="94">loopAdditionalSlides</td>
+<td valign="top" width="94">number</td>
+<td valign="top" width="45">0</td>
+<td valign="top" width="40">2</td>
+<td valign="top" width="207">loop模式下slides数量增加个数</td>
+</tr>
+<tr>
+<td valign="top" width="94">loopedSlides</td>
+<td valign="top" width="94">number</td>
+<td valign="top" width="45">1</td>
+<td valign="top" width="40">2</td>
+<td valign="top" width="207">在loop模式下使用slidesPerview:&#8217;auto&#8217;,还需使用该参数设置所要用到的loop个数</td>
+</tr>
+<tr>
+<td valign="top" width="94">slidesPerView</td>
+<td valign="top" width="94">number</p>
+<p>or &#8216;auto&#8217;</td>
+<td valign="top" width="45">1</td>
+<td valign="top" width="40">4</td>
+<td valign="top" width="207">旋转模式下，设置slider&#8217;s容器能够同时显示的slides数量。另外，支持&#8217;auto&#8217;值，会根据容器container的宽度调整slides数目。‘auto’不兼容loop模式</td>
+</tr>
+<tr>
+<td valign="top" width="94">slidesPerViewFit</td>
+<td valign="top" width="94">boolean</td>
+<td valign="top" width="45">true</td>
+<td valign="top" width="40">false</td>
+<td valign="top" width="207">仅当已设置了slidesPerView:&#8217;auto&#8217;，以及当slides的宽度大于容器，该参数生效。默认为true然后宽度大的slide 过渡时会划分为边缘的两部分。为false时，slide transition 会划分为比容器container大的多个slides</td>
+</tr>
+<tr>
+<td valign="top" width="94">slidesPerGroup</td>
+<td valign="top" width="94">number</td>
+<td valign="top" width="45">1</td>
+<td valign="top" width="40">2</td>
+<td valign="top" width="207">定义slides的数量多少为一组，在旋转模式下有效。（carousel mode）</td>
+</tr>
+<tr>
+<td valign="top" width="94">calculateHeight</td>
+<td valign="top" width="94">boolean</td>
+<td valign="top" width="45">false</td>
+<td valign="top" width="40">true</td>
+<td valign="top" width="207">当值为true时，Swiper根据slides内容计算容器高度。响应式布局中或不知道slides高度时十分有用（就像响应式的图片）</td>
+</tr>
+<tr>
+<td valign="top" width="94">roundLengths</td>
+<td valign="top" width="94">boolean</td>
+<td valign="top" width="45">false</td>
+<td valign="top" width="40">true</td>
+<td valign="top" width="207">值为true时，Swiper会四舍五入宽度和高度，在响应式的滑块中包含误差时十分有用。</td>
+</tr>
+<tr>
+<td valign="top" width="94">cssWidthAndHeight</td>
+<td valign="top" width="94">boolean</td>
+<td valign="top" width="45">false</td>
+<td valign="top" width="40">true</td>
+<td valign="top" width="207">值为true以及Swiper中的container，wrapper和slides没有高度</td>
+</tr>
+<tr>
+<td valign="top" width="94">updateFormElements</td>
+<td valign="top" width="94">boolean</td>
+<td valign="top" width="45">true</td>
+<td valign="top" width="40">false</td>
+<td valign="top" width="207">当所有的内嵌图像（img标签）加载完成后Swiper会重新初始化。</td>
+</tr>
+<tr>
+<td valign="top" width="94">watchActiveIndex</td>
+<td valign="top" width="94">boolean</td>
+<td valign="top" width="45">false</td>
+<td valign="top" width="40">true</td>
+<td valign="top" width="207">如果启用触屏事件期间会重新动态计算活动块的索引。</td>
+</tr>
+<tr>
+<td valign="top" width="94">visiblilityFullfit</td>
+<td valign="top" width="94">boolean</td>
+<td valign="top" width="45">false</td>
+<td valign="top" width="40">true</td>
+<td valign="top" width="207">如果启用，仅有“可视”的slides会最后适应容器的大小</td>
+</tr>
+<tr>
+<td valign="top" width="94">autoResize</td>
+<td valign="top" width="94">boolean</td>
+<td valign="top" width="45">true</td>
+<td valign="top" width="40">false</td>
+<td valign="top" width="207">值为false时，窗口尺寸改变时，禁掉slides自适应</td>
+</tr>
+<tr>
+<td valign="top" width="94">DOManimation</td>
+<td valign="top" width="94">boolean</td>
+<td valign="top" width="45">true</td>
+<td valign="top" width="40">false</td>
+<td valign="top" width="207">在不支持css transitions(IE7-9)的浏览器上是否使用自定义的DOM动画</td>
+</tr>
+<tr>
+<td valign="top" width="94">resistance</td>
+<td valign="top" width="94">boolean or &#8220;100%&#8221;</td>
+<td valign="top" width="45">true</td>
+<td valign="top" width="40">false</td>
+<td valign="top" width="207">值为false时禁用resistant bounds（抵抗反弹）,设置为‘100%&#8217;时启用resistant（抵抗）模式</td>
+</tr>
+<tr>
+<td valign="top" width="94">noSwiping</td>
+<td valign="top" width="94">boolean</td>
+<td valign="top" width="45">false</td>
+<td valign="top" width="40">true</td>
+<td valign="top" width="207">值为true时，当swiper新增类”noSwipingClass“的滑动块时，禁掉该元素的滑动。</td>
+</tr>
+<tr>
+<td valign="top" width="94">preventLinks</td>
+<td valign="top" width="94">boolean</td>
+<td valign="top" width="45">true</td>
+<td valign="top" width="40">false</td>
+<td valign="top" width="207">启用时当碰触滑块（slides）时禁止&lt;a&gt;标签链接</td>
+</tr>
+<tr>
+<td valign="top" width="94">preventLinksPropagation</td>
+<td valign="top" width="94">boolean</td>
+<td valign="top" width="45">false</td>
+<td valign="top" width="40">true</td>
+<td valign="top" width="207">如滑动过程中需要跟preventLinks一起禁用stopPropagation，设置值为true</td>
+</tr>
+<tr>
+<td valign="top" width="94">initialSlide</td>
+<td valign="top" width="94">number</td>
+<td valign="top" width="45">2</td>
+<td valign="top" width="40">0</td>
+<td valign="top" width="207">初始块（页面）的索引</td>
+</tr>
+<tr>
+<td valign="top" width="94">useCSS3Transforms</td>
+<td valign="top" width="94">boolean</td>
+<td valign="top" width="45">true</td>
+<td valign="top" width="40">false</td>
+<td valign="top" width="207">值为false时禁用css3 transforms（减少内存，提高性能，同时也降低了美观）,同时使用wrapper的left/top属性代替。</td>
+</tr>
+</tbody>
+</table>
+
+<p>自由模式与滑块容器（Free Mode and Scroll Container)</p>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="77">Parameter（参数）</td>
+<td valign="top" width="77">Type(类型)</td>
+<td valign="top" width="71">Default Value（默认值</td>
+<td valign="top" width="56">Example（例子）</td>
+<td valign="top" width="176">Description（说明</td>
+</tr>
+<tr>
+<td valign="top" width="77">freeMode</td>
+<td valign="top" width="77">boolean</td>
+<td valign="top" width="71">false</td>
+<td valign="top" width="56">true</td>
+<td valign="top" width="176">若为真slide坐标不固定</td>
+</tr>
+<tr>
+<td valign="top" width="77">freeModeFluid</td>
+<td valign="top" width="77">boolean</td>
+<td valign="top" width="71">false</td>
+<td valign="top" width="56">true</td>
+<td valign="top" width="176">若为真，释放滑块之后仍会滑动一小会</td>
+</tr>
+<tr>
+<td valign="top" width="77">scrollContainer</td>
+<td valign="top" width="77">boolean</td>
+<td valign="top" width="71">false</td>
+<td valign="top" width="56">true</td>
+<td valign="top" width="176">设置为真时，让Swiper看上去像滑动区（scrollable area）</td>
+</tr>
+<tr>
+<td valign="top" width="77">momentumRatio</td>
+<td valign="top" width="77">number</td>
+<td valign="top" width="71">1</td>
+<td valign="top" width="56">2</td>
+<td valign="top" width="176">设置的值越大，当释放滑块时的动量距离越大</td>
+</tr>
+<tr>
+<td valign="top" width="77">momentumBounce</td>
+<td valign="top" width="77">boolean</td>
+<td valign="top" width="71">true</td>
+<td valign="top" width="56">false</td>
+<td valign="top" width="176">false时禁用自由模式下的（free mode）动量弹性</td>
+</tr>
+<tr>
+<td valign="top" width="77">momentumBounceRatio</td>
+<td valign="top" width="77">number</td>
+<td valign="top" width="71">1</td>
+<td valign="top" width="56">2</td>
+<td valign="top" width="176">值越大产生的动量弹性（momentum bounce）效果越明显</td>
+</tr>
+</tbody>
+</table>
+
+<p>块（slides）偏移</p>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="61">Parameter（参数）</td>
+<td valign="top" width="61">Type(类型)</td>
+<td valign="top" width="52">Default Value（默认值</td>
+<td valign="top" width="44">Example（例子）</td>
+<td valign="top" width="230">Description（说明</td>
+</tr>
+<tr>
+<td valign="top" width="61">centeredSlides</td>
+<td valign="top" width="61">boolean</td>
+<td valign="top" width="52">false</td>
+<td valign="top" width="44">true</td>
+<td valign="top" width="230">若为真，那么活动块会居中，而非默认状态下的居左</td>
+</tr>
+<tr>
+<td valign="top" width="61">offsetPxBefore</td>
+<td valign="top" width="61">number</td>
+<td valign="top" width="52">0</td>
+<td valign="top" width="44">100</td>
+<td valign="top" width="230">指定slides与wrapper左边框的偏移量</td>
+</tr>
+<tr>
+<td valign="top" width="61">offsetPxAfter</td>
+<td valign="top" width="61">number</td>
+<td valign="top" width="52">0</td>
+<td valign="top" width="44">100</td>
+<td valign="top" width="230">指定slides与wrapper右边框的偏移量</td>
+</tr>
+<tr>
+<td valign="top" width="61">offsetSlidesBefore</td>
+<td valign="top" width="61">number</td>
+<td valign="top" width="52">0</td>
+<td valign="top" width="44">2</td>
+<td valign="top" width="230">滑块slides与wrapper左边框的偏移量等于等于指定滑块slides个数的宽度。这在响应式布局中而你又不知道slides宽度时，将十分有用。</td>
+</tr>
+<tr>
+<td valign="top" width="61">offsetSlidesAfter</td>
+<td valign="top" width="61">number</td>
+<td valign="top" width="52">0</td>
+<td valign="top" width="44">2</td>
+<td valign="top" width="230">滑块slides与wrapper右边框的偏移量等于等于指定滑块slides个数的宽度。这在响应式布局中而你又不知道slides宽度时，将十分有用。</td>
+</tr>
+</tbody>
+</table>
+
+<p>触屏/鼠标事件效应（Touch/mouse interactions ）</p>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="66">Parameter（参数）</td>
+<td valign="top" width="66">Type(类型)</td>
+<td valign="top" width="53">Default Value（默认值</td>
+<td valign="top" width="44">Example（例子）</td>
+<td valign="top" width="223">Description（说明</td>
+</tr>
+<tr>
+<td valign="top" width="66">touchRatio</td>
+<td valign="top" width="66">number</td>
+<td valign="top" width="53">1</td>
+<td valign="top" width="44">0.8</td>
+<td valign="top" width="223">触屏比率</td>
+</tr>
+<tr>
+<td valign="top" width="66">simulateTouch</td>
+<td valign="top" width="66">boolean</td>
+<td valign="top" width="53">true</td>
+<td valign="top" width="44">false</td>
+<td valign="top" width="223">true,Swiper接受鼠标事件时与触屏事件相似。（单击以及拖曳滑块）</td>
+</tr>
+<tr>
+<td valign="top" width="66">onlyExternal</td>
+<td valign="top" width="66">boolean</td>
+<td valign="top" width="53">false</td>
+<td valign="top" width="44">true</td>
+<td valign="top" width="223">值为true时，只能使用扩展API函数内的swipeRight 或swiperLeft改变slides滑动，其他失效。正如例子里的tabs切换十分有用</td>
+</tr>
+<tr>
+<td valign="top" width="66">followFinger</td>
+<td valign="top" width="66">boolean</td>
+<td valign="top" width="53">true</td>
+<td valign="top" width="44">false</td>
+<td valign="top" width="223">值为false时，仅当你释放slide时才会滑动，当你用手指按住滑块它不会动。</td>
+</tr>
+<tr>
+<td valign="top" width="66">grabCursor</td>
+<td valign="top" width="66">boolean</td>
+<td valign="top" width="53">false</td>
+<td valign="top" width="44">true</td>
+<td valign="top" width="223">该选项给Swiper用户提供小小的贴心应用，值为true时，光标在Swiper上时成手掌状。</td>
+</tr>
+<tr>
+<td valign="top" width="66">shortSwipes</td>
+<td valign="top" width="66">boolean</td>
+<td valign="top" width="53">true</td>
+<td valign="top" width="44">false</td>
+<td valign="top" width="223">值为false时，禁用short swipes</td>
+</tr>
+<tr>
+<td valign="top" width="66">longSwipesRatid</td>
+<td valign="top" width="66">number</td>
+<td valign="top" width="53">0.5</td>
+<td valign="top" width="44">0.3</td>
+<td valign="top" width="223">Swiper 中到上/下滑块的触发率</td>
+</tr>
+<tr>
+<td valign="top" width="66">moveStartThreshold</td>
+<td valign="top" width="66">number</td>
+<td valign="top" width="53">false</td>
+<td valign="top" width="44">100</td>
+<td valign="top" width="223">滑动的临界值，临界值单位为px，如果触屏距离小于该值滑块不会运动。</td>
+</tr>
+</tbody>
+</table>
+
+<p>Navigation</p>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="102">Parameter（参数）</td>
+<td valign="top" width="102">Type(类型)</td>
+<td valign="top" width="52">Default Value（默认值</td>
+<td valign="top" width="43">Example（例子）</td>
+<td valign="top" width="192">Description（说明</td>
+</tr>
+<tr>
+<td valign="top" width="102">keyboardControl</td>
+<td valign="top" width="102">boolean</td>
+<td valign="top" width="52">false</td>
+<td valign="top" width="43">true</td>
+<td valign="top" width="192">值为true时，水平模式下，能使用键盘左右方向键滑动，垂直模式下能使用上下方向键滑动</td>
+</tr>
+<tr>
+<td valign="top" width="102">mousewheelControl</td>
+<td valign="top" width="102">boolean</td>
+<td valign="top" width="52">false</td>
+<td valign="top" width="43">true</td>
+<td valign="top" width="192">值为true时，能够使用鼠标滑轮滑动swiper</td>
+</tr>
+<tr>
+<td valign="top" width="102">mousewheelControlForceToAxis</td>
+<td valign="top" width="102">boolean</td>
+<td valign="top" width="52">false</td>
+<td valign="top" width="43">true</td>
+<td valign="top" width="192">值为真时，鼠标轮滑会改变轴向，所以水平模式下的鼠标滑轮只作用于水平鼠标滑块，垂直的作用于垂直模式。</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Pagination（分页器）(指示器)</p>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="63">Parameter（参数）</td>
+<td valign="top" width="63">Type(类型)</td>
+<td valign="top" width="40">Default Value（默认值</td>
+<td valign="top" width="42">Example（例子）</td>
+<td valign="top" width="240">Description（说明</td>
+</tr>
+<tr>
+<td valign="top" width="63">pagination</td>
+<td valign="top" width="63">string or HTML Element</td>
+<td valign="top" width="40">-</td>
+<td valign="top" width="42">&#8216;.my-pagination&#8217;</td>
+<td valign="top" width="240">css选择器中的分页。或者HTML元素内的分页元素</td>
+</tr>
+<tr>
+<td valign="top" width="63">paginaClickable</td>
+<td valign="top" width="63">boolean</td>
+<td valign="top" width="40">false</td>
+<td valign="top" width="42">true</td>
+<td valign="top" width="240">值为真时，当单击指示器时会执行过渡动画到目标slide</td>
+</tr>
+<tr>
+<td valign="top" width="63">paginationAsRange</td>
+<td valign="top" width="63">boolean</td>
+<td valign="top" width="40">true</td>
+
+<td valign="top" width="240">为真时，跟可见块相关的指示器按钮会新增css类。当使用slidesPerview超过1时会十分有用。</td>
+</tr>
+<tr>
+<td valign="top" width="63">createPagination</td>
+<td valign="top" width="63">boolean</td>
+<td valign="top" width="40">true</td>
+<td valign="top" width="42">false</td>
+<td valign="top" width="240">值为真时，Swiper会在slider内生成与slides数量相同的SPAN标签。所有这些生成的span标签都在pagination容器内。每一个span标签都有一个”swiper-pagination-switch“类名，活动的span（及当前slide下的）有一个为”swiper-active-switch’的类名，对于这些使用样式十分有用。</td>
+</tr>
+</tbody>
+</table>
+
+<p>命名空间namespace</p>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="73">Parameter（参数）</td>
+<td valign="top" width="73">Type(类型)</td>
+<td valign="top" width="75">Default Value（默认值</td>
+<td valign="top" width="54">Example（例子）</td>
+<td valign="top" width="182">Description（说明</td>
+</tr>
+<tr>
+<td valign="top" width="73">wrapperClass</td>
+<td valign="top" width="73">string</td>
+<td valign="top" width="75">&#8216;swiper-wrapper&#8217;</td>
+<td valign="top" width="54">&#8216;my-wrapper&#8217;</td>
+<td valign="top" width="182">Swiper内wrapper的css类。具体查看上面的例子</td>
+</tr>
+<tr>
+<td valign="top" width="73">slideClass</td>
+<td valign="top" width="73">string</td>
+<td valign="top" width="75">&#8216;swiper-slide&#8217;</td>
+<td valign="top" width="54">&#8216;my-slide&#8217;</td>
+<td valign="top" width="182">Swiper内slide的css类名。具体查看上面的例子</td>
+</tr>
+<tr>
+<td valign="top" width="73">slideActiveClass</td>
+<td valign="top" width="73">string</td>
+<td valign="top" width="75">&#8216;swiper-slide-active&#8217;</td>
+<td valign="top" width="54">&#8216;my-active-slide&#8217;</td>
+<td valign="top" width="182">Swiper内活动块的css类名。。。</td>
+</tr>
+<tr>
+<td valign="top" width="73">slideActiveClass</td>
+<td valign="top" width="73">string</td>
+<td valign="top" width="75">&#8216;swiper-slide-visible&#8217;</td>
+<td valign="top" width="54">&#8216;my-visible-slide&#8217;</td>
+<td valign="top" width="182">Swiper内可视块的css类名。。。</td>
+</tr>
+<tr>
+<td valign="top" width="73">slideElement</td>
+<td valign="top" width="73">string</td>
+<td valign="top" width="75">&#8216;div&#8217;</td>
+<td valign="top" width="54">&#8216;li&#8217;</td>
+<td valign="top" width="182">使用单一滑块的标签</td>
+</tr>
+<tr>
+<td valign="top" width="73">noSwipingClass</td>
+<td valign="top" width="73">string</td>
+<td valign="top" width="75">&#8216;swiper-no-swiping&#8217;</td>
+<td valign="top" width="54">&#8216;stop-swiping&#8217;</td>
+<td valign="top" width="182">html元素使用的类名，当noSwiping参数设置为true时，用于禁止滑动</td>
+</tr>
+<tr>
+<td valign="top" width="73">paginationElement</td>
+<td valign="top" width="73">string</td>
+<td valign="top" width="75">&#8216;span&#8217;</td>
+<td valign="top" width="54">&#8216;div&#8217;</td>
+<td valign="top" width="182">使用唯一指示按钮的标签</td>
+</tr>
+<tr>
+<td valign="top" width="73">paginatinElementClass</td>
+<td valign="top" width="73">string</td>
+<td valign="top" width="75">&#8216;swiper-pagination-switch&#8217;</td>
+<td valign="top" width="54">&#8216;my-switch&#8217;</td>
+<td valign="top" width="182">使用多个指示按钮的类名</td>
+</tr>
+<tr>
+<td valign="top" width="73">paginationActiveClass</td>
+<td valign="top" width="73">string</td>
+<td valign="top" width="75">&#8216;swiper-active-switch&#8217;</td>
+<td valign="top" width="54">&#8216;my-active-switch&#8217;</td>
+<td valign="top" width="182">当前活动指示按钮的类名</td>
+</tr>
+<tr>
+<td valign="top" width="73">paginationVisibleClass</td>
+<td valign="top" width="73">string</td>
+<td valign="top" width="75">&#8216;swiper-visible-switch&#8217;</td>
+<td valign="top" width="54">&#8216;my-visible-switch&#8217;</td>
+<td valign="top" width="182">可见指示按钮的类名</td>
+</tr>
+</tbody>
+</table>
+
+<p>回调函数（Callbacks）</p>
+<table>
+<tbody>
+<tr>
+<td valign="top" width="80">Parameter（参数）</td>
+<td valign="top" width="80">Type(类型)</td>
+<td valign="top" width="44">Default Value（默认值</td>
+<td valign="top" width="86">Example（例子）</td>
+<td valign="top" width="179">Description（说明</td>
+</tr>
+<tr>
+<td valign="top" width="80">queueStatCallbacks</td>
+<td valign="top" width="80">boolean</td>
+<td valign="top" width="44">false</td>
+<td valign="top" width="86">true</td>
+<td valign="top" width="179">设置为true时，‘slideChangeStart’回调函数入队，所以在快速滑动过程中回调函数只被调用一次。</td>
+</tr>
+<tr>
+<td valign="top" width="80">queueEndCallbacks</td>
+<td valign="top" width="80">boolean</td>
+<td valign="top" width="44">false</td>
+<td valign="top" width="86">true</td>
+<td valign="top" width="179">设置为true时，‘slideChangeEnd’回调函数入队，所以在快速滑动结束后回调函数只被调用一次。</td>
+</tr>
+<tr>
+<td valign="top" width="80">onFirstInit</td>
+<td valign="top" width="80">funciton</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper)</p>
+<p>{</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，首次初始化后马上执行</td>
+</tr>
+<tr>
+<td valign="top" width="80">onInit</td>
+<td valign="top" width="80">function</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper){</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，在其他所有的初始化/再初始化后马上执行</td>
+</tr>
+<tr>
+<td valign="top" width="80">onSwiperCreated</td>
+<td valign="top" width="80">function</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper){</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，当Swiper初始化完成，loop，pagination，等其他参数或方法生成之后执行</td>
+</tr>
+<tr>
+<td valign="top" width="80">onTouchStart</td>
+<td valign="top" width="80">function</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper){</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，当碰触到slider时马上执行</td>
+</tr>
+<tr>
+<td valign="top" width="80">onTouchMove</td>
+<td valign="top" width="80">function</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper){</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，当碰触slider到释放期间执行。</td>
+</tr>
+<tr>
+<td valign="top" width="80">onTouchEnd</td>
+<td valign="top" width="80">function</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper){</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，当释放slider时执行</td>
+</tr>
+<tr>
+<td valign="top" width="80">onSlideReset</td>
+<td valign="top" width="80">function</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper){</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，释放滑块之后，滑块将要滑到当前活动的slide时执行。freeMode模式下不生效。</td>
+</tr>
+<tr>
+<td valign="top" width="80">onSlideChangeStart</td>
+<td valign="top" width="80">funciton</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper){</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，当动画开始过渡到另一slide时执行，即动画开始时执行。freeMode模式下不生效。</td>
+</tr>
+<tr>
+<td valign="top" width="80">onSlideChangeEnd</td>
+<td valign="top" width="80">function</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper){</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，过渡动画结束后执行，即滑块活动停止后执行。freeMode模式下不生效。</td>
+</tr>
+<tr>
+<td valign="top" width="80">onSlideNext</td>
+<td valign="top" width="80">function</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper){</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，与onSlideChangeStart相似，但该函数只能在滑向下一slide开始时生效</td>
+</tr>
+<tr>
+<td valign="top" width="80">onSlidePrev</td>
+<td valign="top" width="80">funciton</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper){</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，与onSlideChangeStart相似，但该函数只能在滑向上一slide开始时生效</td>
+</tr>
+<tr>
+<td valign="top" width="80">onSlideTouch</td>
+<td valign="top" width="80">function</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper){</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，当触碰事件发生后生效。与onToucStart相似，不过该函数会返回.clickedSlide和.clickedSlideIndex的值</td>
+</tr>
+<tr>
+<td valign="top" width="80">onImageReady</td>
+<td valign="top" width="80">function</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper){</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，所有内置图像加载完成后执行，同时“updateOmImagesReady”需设置为“true’</td>
+</tr>
+<tr>
+<td valign="top" width="80">onMomentumBounce</td>
+<td valign="top" width="80">function</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper){</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，执行于动量反弹（momentum bounce）过程中</td>
+</tr>
+<tr>
+<td valign="top" width="80">onResistanceBefore</td>
+<td valign="top" width="80">funciton</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper,p){</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，执行于negative resistance过程中。p-返回抵抗距离。</td>
+</tr>
+<tr>
+<td valign="top" width="80">onResistanceAfter</td>
+<td valign="top" width="80">funciton</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper,p){</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，执行于positive resistance过程中。p-返回抵抗距离。</td>
+</tr>
+<tr>
+<td valign="top" width="80">onSetWrapperTransition</td>
+<td valign="top" width="80">function</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper,duration){</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，每次当Swiper开始动画时执行</td>
+</tr>
+<tr>
+<td valign="top" width="80">onSetWrapperTransform</td>
+<td valign="top" width="80">funciton</td>
+<td valign="top" width="44">-</td>
+<td valign="top" width="86">function(swiper,transform){</p>
+<p>//执行代码</p>
+<p>}</td>
+<td valign="top" width="179">回调函数，swiper的容器wrapper改变其坐标时执行。返回带当前transform 的偏移量的对象。</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
